@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Information Systems</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+    <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+        <i class="fa-solid fa-graduation-cap fa-lg"></i>StudentInformation</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                <i class="fa-solid fa-list fa-lg"></i> All Students</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fa-solid fa-plus fa-lg"></i> Add Student</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    <div class="container-fluid">
+        <h3 class="m-4">All Students</h3>
+        <div class="row">
+            <div class="col-12">
+                {% if students %}
+                <div class="card bg-light ms-4 me-4 mb-4">
+                    <div class="card-header">
+                        <i class="fa-solid fa-list fa-lg"></i>Students Record
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col">student number</th>
+                                        <th scope="col"> first name</th>
+                                        <th scope="col">last name</th>
+                                        <th scope="col">email</th>
+                                        <th scope="col">field of study</th>
+                                        <th scope="col">GPA</th>
+                                        <th scope="col">Action</th>
+
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for student in students %}
+
+                                        <tr>
+                                            <td>{{student.student_number}}</td>
+                                            <td>{{student.first_name}}</td>
+                                            <td>{{student.last_name}}</td>
+                                            <td>{{student.email}}</td>
+                                            <td>{{student.field_of_study}}</td>
+                                            <td>{{student.gpa}}</td>
+                                            <td>Action</td>
+                                        </tr>
+
+                                        {% endfor %}
+                                   
+                    
+                                    </tbody>
+                                  </table>
+                            </div>
+                        </p>
+                      
+                    </div>
+                  </div>
+                {% else %}
+                <h5 class="alert alert-primary ms-4 me-4"> No student found</h5>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <footer class="mt-auto mb-4">
+        <div class="text-center">
+            <span>Copyright &copy; <script> document.write(new Date().getFullYear()) </script> abo academy</span>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
