@@ -61,5 +61,24 @@ def add(request):
     return render(request, 'students/add.html', {'form': form})
 
 
+def edit(request, id):
+    student = get_object_or_404(Student, id=id)  # Safely retrieve the student object or return 404
+
+    if request.method == "POST":
+        form = StudentForm(request.POST, instance=student)
+        if form.is_valid():
+            form.save()
+            return render(request, 'students/edit.html', {'form': form, 'success': True, 'id': id})
+        else:
+            # If the form is invalid, re-render the form with errors and include the id
+            return render(request, 'students/edit.html', {'form': form, 'id': id})
+    else:
+        # Handle GET request: render the form with the existing student data
+        form = StudentForm(instance=student)
+        return render(request, 'students/edit.html', {'form': form, 'id': id})
+
+
+
+
 
 
