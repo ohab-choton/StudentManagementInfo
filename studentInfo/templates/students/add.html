@@ -15,6 +15,17 @@
               <i class="fa-solid fa-address-card fa-lg"></i> Student Registration
             </div>
             <div class="card-body">
+               {% if form.errors %}
+<div class="alert alert-danger">
+    <ul>
+        {% for field, errors in form.errors.items %}
+            <li>{{ field }}: {{ errors|join:", " }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+               
              <form action="{% url 'add' %}" method="POST">
                 {% csrf_token %}
                 {{ form.as_p }} 
